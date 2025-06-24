@@ -38,7 +38,9 @@ Sentry.init({
 const e2eComponentPatch = '<EndToEndTestsScreen />';
 const lastImportRex = /^([^]*)(import\s+[^;]*?;$)/m;
 const patchRex = '@sentry/react-native';
-const headerComponentRex = /<ScrollView/gm;
+// Support both older RN versions with ScrollView and newer versions with NewAppScreen
+const headerComponentRex = /(<ScrollView|<NewAppScreen)/gm;
+const exportDefaultRex = /export\s+default\s+App;/m;
 
 const jsPath = path.join(args.app, 'App.js');
 const tsxPath = path.join(args.app, 'App.tsx');
